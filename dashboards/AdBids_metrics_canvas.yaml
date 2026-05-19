@@ -1,0 +1,114 @@
+type: canvas
+display_name: "Ad Bids — Overview"
+
+# Sensible defaults for most components
+defaults:
+  time_range: P30D
+  comparison_mode: time
+
+rows:
+  - height: 80px
+    items:
+      - width: 12
+        markdown:
+          content: |
+            # Ad Bids — Overview
+
+            Key bid volume and pricing metrics across publishers and domains.
+
+  - height: 220px
+    items:
+      - width: 12
+        kpi_grid:
+          metrics_view: AdBids_metrics
+          measures:
+            - total_bids_measure_measure
+            - total_bid_price_measure_measure
+            - average_bid_price_measure_measure
+            - distinct_publishers_measure_measure
+            - distinct_domains_measure_measure
+          comparison:
+            - percent_change
+            - previous
+          sparkline: right
+
+  - height: 420px
+    items:
+      - width: 12
+        combo_chart:
+          metrics_view: AdBids_metrics
+          title: "Bids & Total Bid Price Over Time"
+          color:
+            field: measures
+            type: value
+            legendOrientation: top
+          x:
+            field: timestamp
+            type: temporal
+            limit: 500
+          y1:
+            field: total_bids_measure_measure
+            type: quantitative
+            mark: bar
+            zeroBasedOrigin: true
+          y2:
+            field: total_bid_price_measure_measure
+            type: quantitative
+            mark: line
+            zeroBasedOrigin: true
+
+  - height: 380px
+    items:
+      - width: 6
+        bar_chart:
+          metrics_view: AdBids_metrics
+          title: "Top Publishers by Total Bid Price"
+          x:
+            field: publisher
+            type: nominal
+            limit: 10
+            sort: -y
+            labelAngle: -30
+          y:
+            field: total_bid_price_measure_measure
+            type: quantitative
+            zeroBasedOrigin: true
+
+      - width: 6
+        bar_chart:
+          metrics_view: AdBids_metrics
+          title: "Top Domains by Total Bid Price"
+          x:
+            field: domain
+            type: nominal
+            limit: 10
+            sort: -y
+            labelAngle: -30
+          y:
+            field: total_bid_price_measure_measure
+            type: quantitative
+            zeroBasedOrigin: true
+
+  - height: 220px
+    items:
+      - width: 12
+        table:
+          metrics_view: AdBids_metrics
+          title: "Bid Price Summary (Min / Avg / Max)"
+          columns:
+            - min_bid_price_measure_measure
+            - average_bid_price_measure_measure
+            - max_bid_price_measure_measure
+
+  - height: 520px
+    items:
+      - width: 12
+        table:
+          metrics_view: AdBids_metrics
+          title: "Publisher × Domain Detail"
+          columns:
+            - publisher
+            - domain
+            - total_bids_measure_measure
+            - total_bid_price_measure_measure
+            - average_bid_price_measure_measure
