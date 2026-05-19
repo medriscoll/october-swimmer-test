@@ -1,0 +1,64 @@
+# Metrics view YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/metrics-views
+# This file was generated using AI.
+
+version: 1
+type: metrics_view 
+
+display_name: Model performance metrics
+connector: duckdb
+model: model
+timeseries: timestamp
+
+dimensions:
+  - name: timestamp
+    display_name: Timestamp
+    column: timestamp
+  - name: publisher
+    display_name: Publisher
+    column: publisher
+  - name: domain
+    display_name: Domain
+    column: domain
+
+measures:
+  - name: total_records_measure_measure
+    display_name: Total records
+    expression: COUNT(*)
+    description: Total number of rows in the model table.
+    format_preset: humanize
+  - name: distinct_publishers_measure_measure
+    display_name: Distinct publishers
+    expression: COUNT(DISTINCT publisher)
+    description: Number of unique publishers represented in the table.
+    format_preset: humanize
+  - name: distinct_domains_measure_measure
+    display_name: Distinct domains
+    expression: COUNT(DISTINCT domain)
+    description: Number of unique domains represented in the table.
+    format_preset: humanize
+  - name: average_bid_price_measure_measure
+    display_name: Average bid price
+    expression: AVG(bid_price)
+    description: Average bid price across all rows.
+    format_preset: humanize
+  - name: total_bid_price_measure_measure
+    display_name: Total bid price
+    expression: SUM(bid_price)
+    description: Sum of bid prices across all rows.
+    format_preset: humanize
+  - name: min_bid_price_measure_measure
+    display_name: Minimum bid price
+    expression: MIN(bid_price)
+    description: Lowest bid price observed.
+    format_preset: humanize
+  - name: max_bid_price_measure_measure
+    display_name: Maximum bid price
+    expression: MAX(bid_price)
+    description: Highest bid price observed.
+    format_preset: humanize
+  - name: distinct_ids_measure_measure
+    display_name: Distinct IDs
+    expression: COUNT(DISTINCT id)
+    description: Number of unique IDs in the table.
+    format_preset: humanize
