@@ -3,11 +3,11 @@
 # This file was generated using AI.
 
 version: 1
-type: metrics_view 
+type: metrics_view
 
 display_name: AdBids
 connector: duckdb
-model: AdBids
+model: working_model
 timeseries: timestamp
 
 dimensions:
@@ -62,3 +62,5 @@ measures:
     expression: COUNT(DISTINCT id)
     description: Number of unique bid IDs.
     format_preset: humanize
+database: main_db
+database_schema: main
